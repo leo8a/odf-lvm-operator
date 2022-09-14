@@ -1,0 +1,6 @@
+---
+# Setup/install tasks
+- include_tasks: install-odf-lvm.yml
+
+# Check ODF LVM installation
+- include_tasks: check-odf-lvm-install.yml

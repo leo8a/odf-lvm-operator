@@ -1,0 +1,8 @@
+---
+- name: Check ODF LVM operator (presence of storage class)
+  k8s:
+    api_version: storage.k8s.io/v1
+    kind: StorageClass
+    name: odf-lvm-vg1
+    namespace: openshift-storage
+    state: present

@@ -1,0 +1,13 @@
+apiVersion: lvm.topolvm.io/v1alpha1
+kind: LVMCluster
+metadata:
+  name: odf-lvmcluster
+  namespace: {{ lvm_operator_namespace }}
+spec:
+  storage:
+    deviceClasses:
+      - name: vg1
+        thinPoolConfig:
+          name: thin-pool-1
+          sizePercent: 90
+          overprovisionRatio: 10

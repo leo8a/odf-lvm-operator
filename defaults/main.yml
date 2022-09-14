@@ -1,0 +1,4 @@
+---
+catalog_source: "redhat-operators"
+lvm_operator_namespace: "openshift-storage"
+lvm_operator_channel: "stable-4.10"

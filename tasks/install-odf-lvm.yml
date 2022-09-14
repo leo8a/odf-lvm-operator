@@ -1,0 +1,28 @@
+---
+- name: Create OLM objects for ODF LVM operator
+  k8s:
+    state: present
+    template: "{{ item }}"
+    wait: true
+  loop:
+    - "00-namespace.yaml.j2"
+    - "01-operator-group.yaml.j2"
+    - "02-subscription.yaml.j2"
+
+- name: Configure ODF LVM operand
+  k8s:
+    state: present
+    template: "{{ item }}"
+    wait: true
+  loop:
+    - "03-lvm-cluster.yaml.j2"
+
+- name: Configure ODF LVM storage class as default
+  k8s:
+    state: present
+    template: "04-storage-class.yaml.j2"
+    wait: true
+  register: lvm_storage_class
+  retries: 10
+  delay: 30
+  until: lvm_storage_class is not failed
