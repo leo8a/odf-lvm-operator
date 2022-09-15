@@ -1,4 +1,17 @@
 ---
+- name: Get ODF LVM info from PackageManifest
+  k8s_info:
+    api_version: packages.operators.coreos.com/v1
+    kind: PackageManifest
+    name: odf-lvm-operator
+    namespace: openshift-operators
+  register: odf_lvm_object
+
+- name: Set defaultChannel and catalogSource
+  set_fact:
+    operator_channel: "{{ odf_lvm_object.resources | json_query('[0].status.defaultChannel') }}"
+    catalog_source: "{{ odf_lvm_object.resources | json_query('[0].status.catalogSource') }}"
+
 - name: Create OLM objects for ODF LVM operator
   k8s:
     state: present

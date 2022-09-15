@@ -8,9 +8,8 @@ Installs the [ODF LVM](https://github.com/red-hat-storage/lvm-operator.git) oper
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-    catalog_source: "redhat-operators"
-    lvm_operator_namespace: "openshift-storage"
-    lvm_operator_channel: "stable-4.10"
+    lvm:
+      operator_namespace: "openshift-storage"
 
 ## Dependencies
 
@@ -22,15 +21,6 @@ This role requires the `kubernetes.core` collection, and have been tested on an 
       gather_facts: false
       roles:
         - leo8a.odf_lvm_operator
-
-For disconnected environments, the `catalog_source` var can be adjusted as follows:
-
-    - hosts: localhost
-      gather_facts: false
-      roles:
-        - leo8a.odf_lvm_operator
-      vars:
-        - catalog_source: "redhat-operator-index"
 
 ## License
 
